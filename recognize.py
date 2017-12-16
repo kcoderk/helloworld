@@ -1,3 +1,4 @@
+#-*- encoding:utf-8 -*-
 import numpy as np
 import cv2
 from PIL import Image
@@ -20,7 +21,7 @@ class captcha():
                 if data[x+a[i]][y+b[i]]==1:
                     subdata.append((x+a[i],y+b[i]))
                     data[x+a[i]][y+b[i]]=2
-                    getPoint(x+a[i],y+b[i],data,subdata)
+                    self.getPoint(x+a[i],y+b[i],data,subdata)
         subdata.append((x,y))
 
     def getcell(self,data):
@@ -86,9 +87,9 @@ class captcha():
         captcha=clf.predict(data)
         return ''.join(captcha)
     def main(self):
-        data = readimg(self.captcha)#'captcha1.png'
-        allimg=getcell(data)
-        print recognize(allimg)
+        data = self.readimg(self.captcha)#'captcha1.png'
+        allimg=self.getcell(data)
+        print self.recognize(allimg)
 if __name__=="__main__":
-    cap=captcha('captcha1.png')
+    cap=captcha('test1.png')
     cap.main()
